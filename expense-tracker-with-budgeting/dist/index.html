@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Expense Tracker with Budgeting</title>
+  
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker with Budgeting</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #E8EBE4;
+            color: #2c3e50;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            color: #798071;
+        }
+
+        #expense-form {
+            width: 80%;
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #B8BACF;
+            border-radius: 5px;
+            box-sizing: border-box;
+            background-color: #D2D5DD;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #999AC6;
+            border-radius: 3px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #798071;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #999AC6;
+        }
+
+        #expenses {
+            width: 80%;
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #B8BACF;
+            border-radius: 5px;
+            box-sizing: border-box;
+            background-color: #D2D5DD;
+        }
+
+        #expenses h2 {
+            margin-top: 0;
+        }
+
+        #expenses ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #expenses li {
+            margin-bottom: 5px;
+        }
+
+        #budget-form {
+            width: 80%;
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #B8BACF;
+            border-radius: 5px;
+            box-sizing: border-box;
+            background-color: #D2D5DD;
+        }
+
+        #goals-form {
+            width: 80%;
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #B8BACF;
+            border-radius: 5px;
+            box-sizing: border-box;
+            background-color: #D2D5DD;
+        }
+
+        #goals-form input[type="submit"] {
+            background-color: #798071;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        #goals-form input[type="submit"]:hover {
+            background-color: #999AC6;
+        }
+    </style>
+</head>
+<body>
+    <h1>Expense Tracker with Budgeting</h1>
+
+    <!-- Expense Entry Form -->
+    <div id="expense-form">
+        <label for="expense-desc">Description:</label>
+        <input type="text" id="expense-desc" placeholder="Description">
+
+        <label for="expense-amount">Amount:</label>
+        <input type="number" id="expense-amount" placeholder="Amount">
+
+        <button onclick="addExpense()">Add Expense</button>
+    </div>
+
+    <!-- Expense List -->
+    <div id="expenses">
+        <h2>Expenses</h2>
+        <ul id="expense-list"></ul>
+    </div>
+
+    <!-- Budget Form -->
+    <div id="budget-form">
+        <label for="budget-amount">Set Your Budget:</label>
+        <input type="number" id="budget-amount" placeholder="Budget Amount">
+
+        <button onclick="setBudget()">Set Budget</button>
+    </div>
+
+    <!-- Goals Form -->
+    <div id="goals-form">
+        <label for="goal-amount">Set Your Financial Goal:</label>
+        <input type="number" id="goal-amount" placeholder="Goal Amount">
+
+        <input type="submit" value="Set Goal" onclick="setGoal()">
+    </div>
+
+    <script>
+        let expenses = [];
+        let budget = 0;
+        let goal = 0;
+
+        function addExpense() {
+            const description = document.getElementById('expense-desc').value.trim();
+            const amount = parseFloat(document.getElementById('expense-amount').value);
+
+            if (!description || isNaN(amount) || amount <= 0) {
+                alert('Please enter a valid description and amount.');
+                return;
+            }
+
+            expenses.push({ description, amount });
+            updateExpensesList();
+        }
+
+        function updateExpensesList() {
+            const expensesList = document.getElementById('expense-list');
+            expensesList.innerHTML = '';
+
+            expenses.forEach(expense => {
+                const li = document.createElement('li');
+                li.textContent = `${expense.description}: $${expense.amount.toFixed(2)}`;
+                expensesList.appendChild(li);
+            });
+        }
+
+        function setBudget() {
+            const budgetAmount = parseFloat(document.getElementById('budget-amount').value);
+
+            if (isNaN(budgetAmount) || budgetAmount <= 0) {
+                alert('Please enter a valid budget amount.');
+                return;
+            }
+
+            budget = budgetAmount;
+            alert(`Budget set to $${budget.toFixed(2)}`);
+        }
+
+        function setGoal() {
+            const goalAmount = parseFloat(document.getElementById('goal-amount').value);
+
+            if (isNaN(goalAmount) || goalAmount <= 0) {
+                alert('Please enter a valid goal amount.');
+                return;
+            }
+
+            goal = goalAmount;
+            alert(`Financial goal set to $${goal.toFixed(2)}`);
+        }
+    </script>
+</body>
+</html>
+<!-- partial -->
+  
+</body>
+</html>
